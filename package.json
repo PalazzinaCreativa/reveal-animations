@@ -1,6 +1,6 @@
 {
   "name": "@palazzinacreativa/reveal-animations",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Scroll reveal animations for Vue project",
   "author": "PalazzinaCreativa",
   "main": "dist/revealanimations.umd.js",
