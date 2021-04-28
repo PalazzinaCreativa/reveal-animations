@@ -14,6 +14,7 @@ const config = {
     name: "RevealAnimations",
     exports: "named"
   },
+  external: ['gsap'],
   plugins: [
     replace({
       "process.env.NODE_ENV": JSON.stringify("production")
