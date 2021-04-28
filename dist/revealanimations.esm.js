@@ -7,9 +7,26 @@ var directive = {
       type: 'fade-in',
       offset: 0.5, // 0.5 = 50%
       target: el,
-      duration: 0.8,
+      duration: 1.2,
+      slideIn: {
+        x: 0,
+        y: 80,
+        fade: false
+      },
       ease: 'Power4.easeOut'
     };
+
+    // Errors
+    if (bind.values.type === 'custom' && !bind.value.initialState) {
+      console.error('No initial state defined');
+      return
+    }
+
+    if (bind.values.type === 'custom' && !bind.value.finalState) {
+      console.error('No final state defined');
+      return
+    }
+
     var options = Object.assign(defaultOptions, bind.value || {}, {}); 
     
     var initialStates = {
@@ -17,7 +34,15 @@ var directive = {
         gsap.set(options.target, { opacity: 0 });
       },
       'slide-in': function () {
-        gsap.set(options.target, { y: 80 });
+        var initialState = {
+          y: options.slideIn.y,
+          x: options.slideIn.x,
+          opacity: options.slideIn.fade ? 0 : 1
+        };
+        gsap.set(options.target, initialState);
+      },
+      'custom': function () {
+        gsap.set(options.target, options.initialState);
       }
     };
 
@@ -26,7 +51,17 @@ var directive = {
         gsap.to(options.target, { opacity: 1, duration: options.duration, ease: options.ease });
       },
       'slide-in': function () {
-        gsap.to(options.target, { y: 0, duration: options.duration, ease: options.ease });
+        gsap.to(options.target, { x: 0, y: 0, opacity: 1, duration: options.duration, ease: options.ease });
+      },
+      'custom': function () {
+        var properties = Object
+          .assign(
+            { duration: options.duration, ease: options.ease },
+            options.finalState,
+            {}
+          );
+
+        gsap.to(options.target, properties);
       }
     };
     
