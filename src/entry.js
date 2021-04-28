@@ -3,7 +3,7 @@ import directive from './revealAnimations'
 function install (Vue) {
   if (install.installed) return
   install.installed = true
-  Vue.directive('reveal-animations', directive)
+  Vue.directive('reveal-animation', directive)
 }
 
 const plugin = {

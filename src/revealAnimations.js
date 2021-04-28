@@ -19,12 +19,12 @@ export default {
     // Errors
     if (bind.value) {
       if (bind.value.type === 'custom' && !bind.value.initialState) {
-        console.error('No initial state defined')
+        console.error('PalazzinaCreativa/revealAnimations: No initial state defined')
         return
       }
 
       if (bind.value.type === 'custom' && !bind.value.finalState) {
-        console.error('No final state defined')
+        console.error('PalazzinaCreativa/revealAnimations: No final state defined')
         return
       }
     }
@@ -63,7 +63,7 @@ export default {
             options.finalState,
             {}
           )
-
+        console.log(properties)
         gsap.to(options.target, properties)
       }
     }

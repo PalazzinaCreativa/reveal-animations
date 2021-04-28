@@ -19,12 +19,12 @@ var directive = {
     // Errors
     if (bind.value) {
       if (bind.value.type === 'custom' && !bind.value.initialState) {
-        console.error('No initial state defined');
+        console.error('PalazzinaCreativa/revealAnimations: No initial state defined');
         return
       }
 
       if (bind.value.type === 'custom' && !bind.value.finalState) {
-        console.error('No final state defined');
+        console.error('PalazzinaCreativa/revealAnimations: No final state defined');
         return
       }
     }
@@ -63,7 +63,7 @@ var directive = {
             options.finalState,
             {}
           );
-
+        console.log(properties);
         gsap.to(options.target, properties);
       }
     };
@@ -93,7 +93,7 @@ var directive = {
 function install (Vue) {
   if (install.installed) { return }
   install.installed = true;
-  Vue.directive('reveal-animations', directive);
+  Vue.directive('reveal-animation', directive);
 }
 
 var plugin = {
