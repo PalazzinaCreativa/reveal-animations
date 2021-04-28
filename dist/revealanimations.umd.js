@@ -40,12 +40,13 @@
           gsap.set(options.target, { opacity: 0 });
         },
         'slide-in': function () {
-          var initialState = {
-            y: options.slideIn.y,
-            x: options.slideIn.x,
-            opacity: options.slideIn.fade ? 0 : 1
-          };
-          gsap.set(options.target, initialState);
+          var slideInOptions = Object.assign(defaultOptions.slideIn, bind.value.slideIn || {}, {});
+
+          gsap.set(options.target, {
+            y: slideInOptions.y,
+            x: slideInOptions.x,
+            opacity: slideInOptions.fade ? 0 : 1
+          });
         },
         'custom': function () {
           gsap.set(options.target, options.initialState);
