@@ -2,13 +2,53 @@ import gsap from 'gsap';
 
 var directive = {
   inserted: function inserted (el, bind) {
-    // Fade in
-    console.log(el);
-    gsap.to(el, { opacity: 1 });
-    // Slide in
+    // Configuration
+    var defaultOptions = {
+      type: 'fade-in',
+      offset: 0.5, // 0.5 = 50%
+      target: el,
+      duration: 0.8,
+      ease: 'Power4.easeOut'
+    };
+    var options = Object.assign(defaultOptions, bind.value || {}, {}); 
+    
+    var initialStates = {
+      'fade-in': function () {
+        gsap.set(options.target, { opacity: 0 });
+      },
+      'slide-in': function () {
+        gsap.set(options.target, { y: 80 });
+      }
+    };
 
-    // Custom
+    var animations = {
+      'fade-in': function () {
+        gsap.to(options.target, { opacity: 1, duration: options.duration, ease: options.ease });
+      },
+      'slide-in': function () {
+        gsap.to(options.target, { y: 0, duration: options.duration, ease: options.ease });
+      }
+    };
+    
+    // Initial state
+    initialStates[options.type]();
 
+    // Intersection Observer
+    var observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: options.threshold
+    };
+
+    var handleIntersect = function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animations[options.type]();
+        }
+      });
+    };
+    var observer = new IntersectionObserver(handleIntersect, observerOptions);
+    observer.observe(options.target);
   }
 };
 

@@ -34,13 +34,11 @@ export default {
     initialStates[options.type]()
 
     // Intersection Observer
-    const observer
-
     const observerOptions = {
       root: null,
       rootMargin: "0px",
       threshold: options.threshold
-    };
+    }
 
     const handleIntersect = (entries, observer) => {
       entries.forEach((entry) => {
@@ -49,7 +47,7 @@ export default {
         }
       })
     }
-    observer = new IntersectionObserver(handleIntersect, observerOptions)
+    const observer = new IntersectionObserver(handleIntersect, observerOptions)
     observer.observe(options.target)
   }
 }
