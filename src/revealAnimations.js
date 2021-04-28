@@ -34,10 +34,11 @@ export default {
         gsap.set(options.target, { opacity: 0 })
       },
       'slide-in': () => {
+        const slideInOptions = Object.assign(defaultOptions.slideIn, bind.value.slideIn || {}, {})
         const initialState = {
-          y: options.slideIn.y,
-          x: options.slideIn.x,
-          opacity: options.slideIn.fade ? 0 : 1
+          y: slideInOptions.slideIn.y,
+          x: slideInOptions.slideIn.x,
+          opacity: slideInOptions.slideIn.fade ? 0 : 1
         }
         gsap.set(options.target, initialState)
       },
