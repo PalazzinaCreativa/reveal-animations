@@ -2,12 +2,54 @@ import gsap from 'gsap'
 
 export default {
   inserted (el, bind) {
-    // Fade in
-    console.log(el)
-    gsap.to(el, { opacity: 1 })
-    // Slide in
+    // Configuration
+    const defaultOptions = {
+      type: 'fade-in',
+      offset: 0.5, // 0.5 = 50%
+      target: el,
+      duration: 0.8,
+      ease: 'Power4.easeOut'
+    }
+    const options = Object.assign(defaultOptions, bind.value || {}, {}) 
+    
+    const initialStates = {
+      'fade-in': () => {
+        gsap.set(options.target, { opacity: 0 })
+      },
+      'slide-in': () => {
+        gsap.set(options.target, { y: 80 })
+      }
+    }
 
-    // Custom
+    const animations = {
+      'fade-in': () => {
+        gsap.to(options.target, { opacity: 1, duration: options.duration, ease: options.ease })
+      },
+      'slide-in': () => {
+        gsap.to(options.target, { y: 0, duration: options.duration, ease: options.ease })
+      }
+    }
+    
+    // Initial state
+    initialStates[options.type]()
 
+    // Intersection Observer
+    const observer
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: options.threshold
+    };
+
+    const handleIntersect = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animations[options.type]()
+        }
+      })
+    }
+    observer = new IntersectionObserver(handleIntersect, observerOptions)
+    observer.observe(options.target)
   }
 }
