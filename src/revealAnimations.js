@@ -63,7 +63,6 @@ export default {
             options.finalState,
             {}
           )
-        console.log(properties)
         gsap.to(options.target, properties)
       }
     }
@@ -89,3 +88,10 @@ export default {
     observer.observe(options.target)
   }
 }
+
+/*
+To do:
+- readme
+- timeline
+- commenti
+- altre animazioni
