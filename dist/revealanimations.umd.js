@@ -23,14 +23,16 @@
       };
 
       // Errors
-      if (bind.values.type === 'custom' && !bind.value.initialState) {
-        console.error('No initial state defined');
-        return
-      }
+      if (bind.value) {
+        if (bind.value.type === 'custom' && !bind.value.initialState) {
+          console.error('No initial state defined');
+          return
+        }
 
-      if (bind.values.type === 'custom' && !bind.value.finalState) {
-        console.error('No final state defined');
-        return
+        if (bind.value.type === 'custom' && !bind.value.finalState) {
+          console.error('No final state defined');
+          return
+        }
       }
 
       var options = Object.assign(defaultOptions, bind.value || {}, {}); 
