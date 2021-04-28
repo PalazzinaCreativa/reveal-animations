@@ -3,9 +3,9 @@
   "version": "0.0.4",
   "description": "Scroll reveal animations for Vue project",
   "author": "PalazzinaCreativa",
-  "main": "dist/test.umd.js",
-  "module": "dist/test.esm.js",
-  "unpkg": "dist/test.min.js",
+  "main": "dist/revealanimations.umd.js",
+  "module": "dist/revealanimations.esm.js",
+  "unpkg": "dist/revealanimations.min.js",
   "scripts": {
     "build": "npm run build:unpkg & npm run build:es & npm run build:umd",
     "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format umd --file dist/revealanimations.umd.js",
